@@ -1,6 +1,6 @@
 var outerRadius;
 var screenScale = 0.8;
-var weekScale = 0.6;
+
 
 var d = new Date();
 
@@ -16,17 +16,24 @@ function setup() {
 
 
 function draw() {
+    setup();
     d = new Date();
 
-    drawClockFace();
-    drawHand();
-    
-    drawWeek();
-    drawDay();
+    drawDay();   
+    drawWeek();    
+    drawYear(); 
 
     drawDateStamp();
 
     // d.setDate(d.getDate() + 0.2);
+}
+
+
+function drawYear(){
+    yearScale = .45;
+    yearRadius = yearScale * (window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth) / 2;
+    drawClockFace();
+    drawHand();
 }
 
 monthAngles = [
@@ -45,23 +52,23 @@ monthAngles = [
 ]
 
 function drawClockFace(){
-    setup();
+    
     push();
     stroke(255);
     translate(window.innerWidth/2, window.innerHeight/2);
 
     fill(0);
     strokeWeight(2);
-    ellipse(0,0,2*outerRadius);
+    ellipse(0,0,2*yearRadius);
 
 
     stroke(255);
     rotate(TAU * 3/16); // january start angle
 
-    line(0,0, outerRadius, 0);
+    line(0,0, yearRadius, 0);
     for(var i in monthAngles){
         rotate(-TAU * monthAngles[i]);
-        line(0,0, outerRadius, 0);    
+        line(0,0, yearRadius, 0);    
     }
 
     pop();
@@ -81,13 +88,13 @@ function drawHand(){
         var daysInMoth = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
         rotate(-TAU*monthAngles[d.getMonth()] * (d.getDate()/daysInMoth))
         
-        line(0,0,outerRadius, 0);        
+        line(0,0,yearRadius, 0);        
         
         stroke(255);
         fill(0);
-        ellipse(0,0,outerRadius*1.5);
+        ellipse(0,0,yearRadius*1.5);
         noFill()
-        ellipse(0,0,outerRadius*2);
+        ellipse(0,0,yearRadius*2);
     pop();
 }
 
@@ -108,7 +115,7 @@ function drawDateStamp(){
     push();
     translate(window.innerWidth/2, window.innerHeight/2);
     textAlign(CENTER, CENTER);
-    textSize(110);
+    textSize(outerRadius/3.5);
     textFont('Helvetica');
     text(hour + ":" + minute, 0, -10);
     pop();
@@ -119,7 +126,10 @@ window.addEventListener('resize', function(){
 })
 
 
+
+
 function drawWeek(){
+    weekScale = 0.6;
     drawWeekFace();
     drawWeekHand();
 }
@@ -193,7 +203,7 @@ function drawWeekHand(){
 }
 
 function drawDay(){
-    var dayScale = .45;
+    var dayScale = .8;
     dayRadius = dayScale * (window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth) / 2;
     drawDayFace();
     drawDayHand();

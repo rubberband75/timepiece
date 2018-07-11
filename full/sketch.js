@@ -102,8 +102,7 @@ function drawDateStamp(){
     fill(255);
     textFont('monospace');
     textSize(20);
-    text(d.toDateString(), 10, 30);
-    text(d.toTimeString().substr(0,8), 10, 60);
+    text(d, 10, 30);
 
     push();
     translate(window.innerWidth/2, window.innerHeight/2);

@@ -139,7 +139,7 @@ function drawWeekFace(){
     ellipse(0,0,2*weekRadius);
 
     y = -0.05*weekRadius;y = 0;
-    x = sqrt(weekRadius**2 - y**2)
+    x = sqrt(weekRadius*weekRadius - y*y)
 
     line(-x, y, x, y);
     line(0, y, 0, -weekRadius);

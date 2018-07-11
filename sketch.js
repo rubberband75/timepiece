@@ -108,7 +108,7 @@ function drawDateStamp(){
     push();
     translate(window.innerWidth/2, window.innerHeight/2);
     textAlign(CENTER, CENTER);
-    textSize(90);
+    textSize(110);
     textFont('Helvetica');
     text(hour + ":" + minute, 0, -10);
     pop();

@@ -1,14 +1,16 @@
 var outerRadius;
 var screenScale = 0.8;
 
+var fillColor = 16;
+var lineColor = 128;
 
 var d = new Date();
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    background(0);
+    background(fillColor);
     strokeWeight(2);
-    stroke(255);
+    stroke(lineColor);
     noFill();
 
     outerRadius = screenScale * (window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth) / 2;    
@@ -54,15 +56,15 @@ monthAngles = [
 function drawClockFace(){
     
     push();
-    stroke(255);
+    stroke(0);
     translate(window.innerWidth/2, window.innerHeight/2);
 
-    fill(0);
+    fill(fillColor);
     strokeWeight(2);
     ellipse(0,0,2*yearRadius);
 
 
-    stroke(255);
+    stroke(lineColor);
     rotate(TAU * 3/16); // january start angle
 
     line(0,0, yearRadius, 0);
@@ -90,8 +92,8 @@ function drawHand(){
         
         line(0,0,yearRadius, 0);        
         
-        stroke(255);
-        fill(0);
+        stroke(lineColor);
+        fill(fillColor);
         ellipse(0,0,yearRadius*1.5);
         noFill()
         ellipse(0,0,yearRadius*2);
@@ -104,9 +106,9 @@ function drawDateStamp(){
 
 
     noStroke();
-    fill(0);
+    fill(fillColor);
     rect(0,10, 500, 30);
-    fill(255);
+    fill(lineColor);
     textFont('monospace');
     textSize(20);
     text(d.toDateString(), 10, 30);
@@ -141,9 +143,9 @@ function drawWeekFace(){
     push();
     // background(0);
     strokeWeight(2);
-    stroke(255);
+    stroke(lineColor);
     // noFill();
-    fill(0);
+    fill(fillColor);
 
     translate(window.innerWidth/2, window.innerHeight/2);
     ellipse(0,0,2*weekRadius);
@@ -193,8 +195,8 @@ function drawWeekHand(){
         
         line(0,0,weekRadius, 0);
 
-        stroke(255);
-        fill(0);
+        stroke(lineColor);
+        fill(fillColor);
         ellipse(0,0,weekRadius*1.5);
         noFill()
         ellipse(0,0,weekRadius*2);
@@ -212,13 +214,13 @@ function drawDay(){
 function drawDayFace(){
     // setup();
     push();
-    stroke(255);
+    stroke(lineColor);
     translate(window.innerWidth/2, window.innerHeight/2);
 
-    fill(0);
+    fill(fillColor);
     strokeWeight(2);
     ellipse(0,0,2*dayRadius);
-    stroke(255);
+    stroke(lineColor);
 
     line(0,0, dayRadius, 0);
     for(var i = 0; i < 24; i++){
@@ -242,8 +244,8 @@ function drawDayHand(){
         
         line(0,0,dayRadius, 0);        
         
-        stroke(255);
-        fill(0);
+        stroke(lineColor);
+        fill(fillColor);
         ellipse(0,0,dayRadius*1.5);
         noFill()
         ellipse(0,0,dayRadius*2);

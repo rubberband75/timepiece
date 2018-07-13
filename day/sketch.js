@@ -43,6 +43,8 @@ function drawDayFace(){
     ellipse(0,0,2*dayRadius);
     stroke(255);
 
+    drawGradient(2*dayRadius);
+    
     line(0,0, dayRadius, 0);
     for(var i = 0; i < 24; i++){
         rotate(PI / 12);
@@ -51,6 +53,67 @@ function drawDayFace(){
 
     pop();
 }
+
+
+divisions = 0;
+function drawGradient(diameter){
+    push();
+    fill(100);
+    var overlap = 0.0;
+    divisions = 72;// (divisions + .277) % 250;
+    var arcLength = (2*PI/divisions);
+
+    strokeWeight(0);
+    colors = [
+        color(0, 0, 255), 
+        color(100), 
+        color(255, 0, 0),
+    ];
+    angles = [
+        0.5, 
+        PI, 
+        2*PI - 0.5,
+    ];
+
+    colorIndex = angles[0] > 0 ? colors.length - 1 : 0;
+
+    for(var i = 0; i < divisions; i++){
+
+        var startAngle = (2*PI/divisions)*(i);
+        var stopAngle = startAngle + arcLength;
+
+        if((startAngle > angles[(colorIndex + 1) % colors.length]) && (true)){
+            colorIndex = (colorIndex + 1) % colors.length;
+        }
+        if(startAngle > angles[angles.length - 1]){
+            colorIndex = angles.length - 1;
+        }
+
+
+        var lerpPercent = 0;
+        if(colorIndex == colors.length - 1){
+
+            if(startAngle > angles[colorIndex]){
+                lerpPercent = (startAngle - angles[colorIndex]) / ((2*PI) - angles[colorIndex]);
+            } else {
+                var backAngle = 2*PI - angles[colorIndex];
+                lerpPercent  = (startAngle + backAngle)/(angles[0] + backAngle);
+            }
+
+            fill(lerpColor(colors[colorIndex],colors[0], lerpPercent));
+
+        } else {
+
+            lerpPercent  = (startAngle - angles[colorIndex])/(angles[(colorIndex+1) % colors.length] - angles[colorIndex]);
+            fill(lerpColor(colors[colorIndex],colors[colorIndex+1], lerpPercent));
+        }
+
+        arc(0, 0, diameter, diameter, startAngle - overlap, stopAngle, PIE);
+    }
+
+    pop();
+}
+
 
 function drawDayHand(){
     push();

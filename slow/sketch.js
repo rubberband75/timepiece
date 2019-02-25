@@ -28,7 +28,7 @@ function drawSlowFace() {
         translate(window.innerWidth/2, window.innerHeight/2);
         stroke(255);
         // noFill()
-        fill(20);
+        fill(30);
         strokeWeight(1);
         ellipse(0,0,dayRadius*2.02);
         
@@ -98,9 +98,9 @@ function drawDayHand(){
         // line(0,0,dayRadius, 0);
 
 
-        stroke(135);
+        stroke(200);
         strokeWeight(1);
-        fill(130);
+        fill(210);
 
         ellipse(0,0,dayRadius / 8);
         triangle(-dayRadius / 6, dayRadius / 40,

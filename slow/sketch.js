@@ -73,7 +73,7 @@ function drawSlowFace() {
         textAlign(CENTER, CENTER);
         textSize(dayRadius * 0.05);
         // textFont('sans-serif');
-        var n2 = ((i + 19) % 24).toString().padStart(2, '0');
+        var n2 = ((i + 18) % 12 + 1).toString().padStart(1, '0');
         text(n2, 0, 0);
         pop();
 
@@ -88,7 +88,7 @@ function drawSlowFace() {
             translate(dayRadius * 0.75, 0);
             rotate((-2 * PI / ticks) * i - (PI / ticks * 2));
 
-            var n = ((i + 18) % 12 + 1).toString().padStart(2, '0');
+            var n = ((i + 19) % 24).toString().padStart(2, '0');
             text(n, 0, 0)
 
             pop();
